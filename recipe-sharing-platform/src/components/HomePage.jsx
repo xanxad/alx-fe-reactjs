@@ -10,7 +10,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="min-h-screen bg-gray-100 p-8">
       <h1 className="text-3xl font-bold text-center mb-8">
         Recipe Sharing Platform
       </h1>
@@ -18,7 +18,7 @@ const HomePage = () => {
         {recipes.map((recipe) => (
           <div
             key={recipe.id}
-            className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden"
+            className="max-w-sm bg-white shadow-lg rounded-lg hover:shadow-xl transition-all overflow-hidden"
           >
             <img
               className="w-full h-48 object-cover"
@@ -26,7 +26,7 @@ const HomePage = () => {
               alt={recipe.title}
             />
             <div className="p-6">
-              <h2 className="text-2xl font-bold text-gray-800">
+              <h2 className="text-2xl font-bold text-blue-600 mt-4 mb-2">
                 {recipe.title}
               </h2>
               <p className="text-gray-600">{recipe.summary}</p>
