@@ -1,3 +1,5 @@
+// src/components/HomePage.jsx
+
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -15,13 +17,21 @@ const HomePage = () => {
       <h1 className="text-3xl font-bold text-center mb-8">
         Recipe Sharing Platform
       </h1>
+      <div className="text-center mb-8">
+        {/* Add link to AddRecipeForm */}
+        <Link
+          to="/add-recipe"
+          className="text-blue-500 hover:underline text-lg font-bold"
+        >
+          Add New Recipe
+        </Link>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {recipes.map((recipe) => (
           <div
             key={recipe.id}
             className="max-w-sm bg-white shadow-lg rounded-lg hover:shadow-xl transition-all overflow-hidden"
           >
-            {/* Wrap the whole card with the Link component */}
             <Link to={`/recipe/${recipe.id}`}>
               <img
                 className="w-full h-48 object-cover"
@@ -33,7 +43,6 @@ const HomePage = () => {
                   {recipe.title}
                 </h2>
                 <p className="text-gray-600">{recipe.summary}</p>
-                {/* Add View Recipe link */}
                 <p className="text-blue-500 hover:underline mt-4">
                   View Recipe
                 </p>
