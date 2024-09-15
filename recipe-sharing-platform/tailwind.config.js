@@ -3,9 +3,6 @@ module.exports = {
   darkMode: false,
   theme: {
     extend: {},
-    screens: {
-      md: "768px",
-    },
   },
   plugins: [],
 };
