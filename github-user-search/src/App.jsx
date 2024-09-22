@@ -1,13 +1,20 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import SearchBar from "./components/SearchBar";
 
 const App = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+    console.log("Searching for:", term);
+  };
+
   return (
-    <Router>
-      <div>
-        <h1>GitHub User Search</h1>
-        {/* Add components here for search input and result display */}
-      </div>
-    </Router>
+    <div>
+      <h1>GitHub User Search</h1>
+      <SearchBar handleSearch={handleSearch} />
+      <p>Search Term: {searchTerm}</p>
+    </div>
   );
 };
 
