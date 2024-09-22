@@ -15,7 +15,7 @@ const Search = ({ handleSearch }) => {
     try {
       const response = await handleSearch(inputValue);
       if (!response) {
-        setError("Looks like we can't find the user");
+        setError("Looks like we cant find the user");
       } else {
         setUser(response);
       }
