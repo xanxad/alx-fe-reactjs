@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const SearchBar = ({ handleSearch }) => {
+const Search = ({ handleSearch }) => {
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -10,6 +10,7 @@ const SearchBar = ({ handleSearch }) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setUser(null); // Reset user state on new search
 
     try {
       const response = await handleSearch(inputValue);
@@ -49,4 +50,4 @@ const SearchBar = ({ handleSearch }) => {
   );
 };
 
-export default SearchBar;
+export default Search;
