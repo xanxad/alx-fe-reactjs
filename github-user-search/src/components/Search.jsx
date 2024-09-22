@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Search = ({ handleSearch }) => {
+const SearchBar = ({ handleSearch }) => {
   const [inputValue, setInputValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -50,4 +50,27 @@ const Search = ({ handleSearch }) => {
   );
 };
 
-export default Search;
+// Example of a fetchUserData function
+const fetchUserData = async (username) => {
+  const response = await fetch(`https://api.github.com/users/${username}`);
+  if (!response.ok) {
+    return null; // Return null if user not found
+  }
+  return response.json(); // Return the user data
+};
+
+// In your main component or wherever you use SearchBar
+const App = () => {
+  const handleSearch = async (username) => {
+    return await fetchUserData(username);
+  };
+
+  return (
+    <div>
+      <h1>GitHub User Search</h1>
+      <SearchBar handleSearch={handleSearch} />
+    </div>
+  );
+};
+
+export default App;
