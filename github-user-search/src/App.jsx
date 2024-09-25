@@ -1,46 +1,29 @@
+// src/App.jsx
 import { useState } from "react";
 import Search from "./components/Search";
-import { fetchUserData } from "./services/githubService";
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const handleSearch = async (username) => {
-    setSearchTerm(username);
-    setLoading(true);
-    setError(null);
-    try {
-      const data = await fetchUserData(username);
-      setUserData(data);
-    } catch (err) {
-      setError(err.message);
-      setUserData(null);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [results, setResults] = useState([]);
 
   return (
-    <div>
-      <h1>GitHub User Search</h1>
-      <Search handleSearch={handleSearch} />
-      {loading && <p>Loading...</p>}
-      {error && <p>Looks like we cant find the user.</p>}
-      {userData && (
-        <div>
-          <img src={userData.avatar_url} alt={userData.name} width="100" />
-          <p>Name: {userData.name}</p>
-          <p>Username: {userData.login}</p>
-          <p>
-            <a href={userData.html_url} target="_blank" rel="noreferrer">
-              View GitHub Profile
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold text-center mb-8">
+        GitHub User Search
+      </h1>
+      <Search setResults={setResults} />
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+        {results.map((user) => (
+          <div key={user.id} className="p-4 border rounded-md">
+            <p className="font-bold">{user.login}</p>
+            <p>Location: {user.location || "Not specified"}</p>
+            <p>Repos: {user.public_repos || "N/A"}</p>
+            <a href={user.html_url} className="text-blue-500">
+              View Profile
             </a>
-          </p>
-        </div>
-      )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
