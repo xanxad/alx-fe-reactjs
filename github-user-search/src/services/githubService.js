@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const GITHUB_API_BASE_URL = "https://api.github.com/search/users";
+const GITHUB_API_BASE_URL = "https://api.github.com/search/users?q=";
 
 export const fetchUsers = async (params, page = 1) => {
   const { username, location, minRepos } = params;
@@ -11,7 +11,7 @@ export const fetchUsers = async (params, page = 1) => {
 
   try {
     const response = await axios.get(
-      `${GITHUB_API_BASE_URL}?q=${encodeURIComponent(query)}`,
+      `${GITHUB_API_BASE_URL}${encodeURIComponent(query)}`,
       {
         params: {
           per_page: 30,
