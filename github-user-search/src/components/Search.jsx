@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchUsers } from "../services/githubService";
+import { fetchUserData } from "../services/githubService";
 
 function Search() {
   const [searchParams, setSearchParams] = useState({
@@ -25,7 +25,7 @@ function Search() {
     setUsers([]);
     setPage(1);
     try {
-      const data = await fetchUsers(searchParams, 1);
+      const data = await fetchUserData(searchParams, 1);
       setUsers(data.items);
       setHasMore(data.total_count > data.items.length);
     } catch (err) {
@@ -39,7 +39,7 @@ function Search() {
     setLoading(true);
     try {
       const nextPage = page + 1;
-      const data = await fetchUsers(searchParams, nextPage);
+      const data = await fetchUserData(searchParams, nextPage);
       setUsers((prev) => [...prev, ...data.items]);
       setPage(nextPage);
       setHasMore(data.total_count > users.length + data.items.length);
